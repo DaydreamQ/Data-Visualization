@@ -1,19 +1,6 @@
-var svgWidth = 700;
-var svgHeight = 500;
-
-var margin = {
-    top: 20,
-    right: 40,
-    bottom: 80,
-    left: 100
-};
-
-var width = svgWidth - margin.left - margin.right;
-var height = svgHeight - margin.top - margin.bottom;
-
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-var svg = d3
-    .select(".chart2")
+var svg_sex = d3
+    .select(".chart_sex")
     .append("svg")
     .attr("width", svgWidth)
     .attr("height", svgHeight)
@@ -21,7 +8,7 @@ var svg = d3
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Append an SVG group
-var chart = svg.append("g");
+var chart_sex = svg_sex.append("g");
 
 // Append a div to the body to create tooltips, assign it a class
 d3.select(".chart2").append("div").attr("class", "tooltip").style("opacity", 0);
@@ -115,9 +102,9 @@ d3.csv("data.csv", function (err, myData) {
         });
 
     // Create tooltip
-    chart.call(toolTip);
+    chart_sex.call(toolTip);
 
-    chart
+    chart_sex
         .selectAll("circle")
         .data(myData)
         .enter()
@@ -138,7 +125,7 @@ d3.csv("data.csv", function (err, myData) {
             toolTip.hide(data)
         });
 
-    chart
+    chart_sex
         .selectAll("text")
         .data(myData)
         .enter()
@@ -165,7 +152,7 @@ d3.csv("data.csv", function (err, myData) {
         });
 
     // Append an SVG group for the x-axis, then display the x-axis
-    chart
+    chart_sex
         .append("g")
         .attr("transform", "translate(0," + height + ")")
         // The class name assigned here will be used for transition effects
@@ -173,12 +160,12 @@ d3.csv("data.csv", function (err, myData) {
         .call(bottomAxis);
 
     // Append a group for y-axis, then display it
-    chart.append("g")
+    chart_sex.append("g")
         .attr("class", "y-axis")
         .call(leftAxis);
 
     // Append y-axis label
-    chart
+    chart_sex
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left + 40)
@@ -189,7 +176,7 @@ d3.csv("data.csv", function (err, myData) {
         .text("Bachelor's Degree or Greater");
 
     // Append x-axis labels
-    chart
+    chart_sex
         .append("text")
         .attr(
             "transform",
@@ -200,7 +187,7 @@ d3.csv("data.csv", function (err, myData) {
         .attr("data-axis-name", "obese")
         .text("Obese (BMI > 30)(%)");
 
-    chart
+    chart_sex
         .append("text")
         .attr(
             "transform",
@@ -245,7 +232,7 @@ d3.csv("data.csv", function (err, myData) {
             // Set the domain for the x-axis
             xLinearScale.domain([xMin, xMax]);
             // Create a transition effect for the x-axis
-            svg
+            svg_sex
                 .select(".x-axis")
                 .transition()
                 // .ease(d3.easeElastic)
