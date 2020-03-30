@@ -1,19 +1,19 @@
-var svgWidth = 700;
-var svgHeight = 500;
+// var svgWidth_age = 700;
+// var svgHeight_age = 500;
 
-var margin = {
-    top: 20,
-    right: 40,
-    bottom: 80,
-    left: 100
-};
+// var margin_age = {
+//     top: 20,
+//     right: 40,
+//     bottom: 80,
+//     left: 100
+// };
 
-var width = svgWidth - margin.left - margin.right;
-var height = svgHeight - margin.top - margin.bottom;
+// var width_age = svgWidth_age - margin_age.left - margin_age.right;
+// var height_age = svgHeight_age - margin_age.top - margin_age.bottom;
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-var svg = d3
-    .select(".chart1")
+var svg_age = d3
+    .select(".chart_age")
     .append("svg")
     .attr("width", svgWidth)
     .attr("height", svgHeight)
@@ -21,10 +21,10 @@ var svg = d3
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // Append an SVG group
-var chart = svg.append("g");
+var chart_age = svg_age.append("g");
 
 // Append a div to the body to create tooltips, assign it a class
-// d3.select(".chart1").append("div").attr("class", "tooltip").style("opacity", 0);
+d3.select(".chart_age").append("div").attr("class", "tooltip").style("opacity", 0);
 
 // Retrieve data from the CSV file and execute everything below
 d3.csv("data.csv", function (err, myData) {
@@ -84,7 +84,7 @@ d3.csv("data.csv", function (err, myData) {
     yLinearScale.domain([0, yMax]);
 
     // Initializes tooltip
-    var toolTip = d3
+    var toolTip_age = d3
         .tip()
         .attr("class", "tooltip")
         // Define position
@@ -115,9 +115,9 @@ d3.csv("data.csv", function (err, myData) {
         });
 
     // Create tooltip
-    chart.call(toolTip);
+    chart_age.call(toolTip_age);
 
-    chart
+    chart_age
         .selectAll("circle")
         .data(myData)
         .enter()
@@ -132,13 +132,13 @@ d3.csv("data.csv", function (err, myData) {
         .attr("fill", "lightblue")
         // Both circle and text instances have mouseover & mouseout event handlers
         .on("mouseover", function (data) {
-            toolTip.show(data)
+            toolTip_age.show(data)
         })
         .on("mouseout", function (data) {
-            toolTip.hide(data)
+            toolTip_age.hide(data)
         });
 
-    chart
+    chart_age
         .selectAll("text")
         .data(myData)
         .enter()
@@ -152,10 +152,10 @@ d3.csv("data.csv", function (err, myData) {
             return data.abbr;
         })
         .on("mouseover", function (data) {
-            toolTip.show(data)
+            toolTip_age.show(data)
         })
         .on("mouseout", function (data) {
-            toolTip.hide(data)
+            toolTip_age.hide(data)
         })
         .attr("x", function (data, index) {
             return xLinearScale(Number(data[currentAxisLabelX]));
@@ -165,7 +165,7 @@ d3.csv("data.csv", function (err, myData) {
         });
 
     // Append an SVG group for the x-axis, then display the x-axis
-    chart
+    chart_age
         .append("g")
         .attr("transform", "translate(0," + height + ")")
         // The class name assigned here will be used for transition effects
@@ -173,12 +173,12 @@ d3.csv("data.csv", function (err, myData) {
         .call(bottomAxis);
 
     // Append a group for y-axis, then display it
-    chart.append("g")
+    chart_age.append("g")
         .attr("class", "y-axis")
         .call(leftAxis);
 
     // Append y-axis label
-    chart
+    chart_age
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left + 40)
@@ -189,7 +189,7 @@ d3.csv("data.csv", function (err, myData) {
         .text("Bachelor's Degree or Greater");
 
     // Append x-axis labels
-    chart
+    chart_age
         .append("text")
         .attr(
             "transform",
@@ -200,7 +200,7 @@ d3.csv("data.csv", function (err, myData) {
         .attr("data-axis-name", "obese")
         .text("Obese (BMI > 30)(%)");
 
-    chart
+    chart_age
         .append("text")
         .attr(
             "transform",
